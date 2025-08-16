@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     # My Apps
     'daily_routine',
+    'expenditure',
    
 ]
 
@@ -110,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 

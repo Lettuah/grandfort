@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import  path, include
 
+from daily_routine import views
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('daily/routine', include('daily_routine.urls'))
+    path('', views.index, name='daily_routine_index')
 ]
