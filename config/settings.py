@@ -40,10 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My Apps
-    'account',
+    'accounts',
     'main.apps.MainConfig',
-    'daily_routine',
-    'expenditure',
 
     # Other Apps
     'tailwind',
@@ -145,3 +143,6 @@ if DEBUG:
     MIDDLEWARE += [
         "django_browser_reload.middleware.BrowserReloadMiddleware",
     ]
+
+# CUSTOM USER MODEL
+AUTH_USER_MODEL = 'accounts.CustomUser'
