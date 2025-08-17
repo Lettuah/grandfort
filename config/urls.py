@@ -17,7 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import  path, include
 
+from config import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('daily/routine', include('daily_routine.urls'))
+    path('', include('main.urls'), ),
 ]
+
+
+# For django tailwind
+if settings.DEBUG:
+    # Include django_browser_reload URLs only in DEBUG mode
+    urlpatterns += [
+        path("__reload__/", include("django_browser_reload.urls")),
+    ]

@@ -1,0 +1,20 @@
+{% extends '../base.html' %}
+{% block title %}Login - GrandFort {%endblock%}
+
+{%block content %}
+
+<div class="flex items-center justify-center min-h-screen">
+  <form action="/your-name/" method="post"
+    class="flex min-w-md flex-col justify-center  rounded-sm border border-sky-600 bg-sky-50 p-24">
+    <label for="username" class="text-sky-950">Username:</label>
+    <input type="text" name="username" class="form-input" placeholder="Enter your username" />
+    <label for="password" class="text-sky-950">Password:</label>
+    <input type="text" name="password" class="form-input" placeholder="Enter your username" />
+
+    <!-- Load auto generated login form -->
+    <!-- Submit button -->
+    <input type="submit" value="Submit"
+      class="items-center rounded-md bg-sky-700 px-4 py-2 text-sky-100 hover:bg-sky-600" />
+  </form>
+</div>
+{%endblock%}
