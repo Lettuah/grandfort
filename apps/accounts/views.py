@@ -2,7 +2,7 @@
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from main.views import home
+from ..main.views import home
 from .models import PendingUser, CustomUser
 from django.utils.crypto import get_random_string
 from django.contrib.auth.hashers import make_password

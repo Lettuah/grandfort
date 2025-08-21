@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('auth/', include('accounts.urls'), name='auth')
+    path('auth/', include('apps.accounts.urls'), name='auth')
 ]
