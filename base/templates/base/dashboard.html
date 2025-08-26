@@ -1,0 +1,132 @@
+{% extends '_base.html' %} 
+{% block content%}
+<div class="container-fluid py-2">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Daily Routine</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Date
+                                    </th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Id
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mortality
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Age
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Feed Type
+                                    </th>
+
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Morning Feed
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Morning Water
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Morning Medication
+                                    </th>
+
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Evening Feed
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Evening Water
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Evening Medication
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Comment
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for routine in routines %}
+                                <tr>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.date}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary  mb-0">{{routine.stock.batch_id}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.mortality}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.age}}</p>
+                                    </td>
+
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.feed_type}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.morning_feed}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.morning_water}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">
+                                            {{routine.morning_medication}}
+                                        </p>
+                                    </td>
+
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.evening_feed}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">{{routine.evening_water}}</p>
+                                    </td>
+                                    
+                                    <td>
+                                        <p class="text-xs text-secondary text-center mb-0">
+                                           {{routine.evening_medication}}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary mb-0">{{routine.comment}}</p>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr>
+
+{% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'layouts/head-tag.html' %}
+
+<body class="g-sidenav-show  bg-gray-100">
+  <!--  Aside Menu Begins -->
+  {% include 'layouts/aside.html'%}
+  <!-- Aside Menu Ends -->
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    {% include 'layouts/navbar.html'%}
+    <!-- End Navbar -->
+    <div class="container-fluid py-2">
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <!-- Error Message -->
+      {% if message.tags == "error" %}
+      <div class="alert alert-primary alert-dismissible text-white" role="alert">
+        <span class="text-sm">{{message}}</span>
+        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      {%elif message.tags == 'success'%}
+      <div class="alert alert-success alert-dismissible text-white" role="alert">
+        <span class="text-sm">{{message}}</span>
+        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+
+
+    </div>
+
+    <!-- Main Content -->
+    {% block content %} {% endblock %}
+
+    <!-- End Main Content -->
+
+
+    <!-- Footer -->
+    {% include 'layouts/footer.html'%}
+    <!-- End Footer -->
+  </main>
+  <!-- Fixed Plugin -->
+  {% include 'layouts/fixed-plugin.html'%}
+  <!-- End Fixed Plug -->
+  {% include 'layouts/script-tag.html' %}
+</body>
+
+</html>

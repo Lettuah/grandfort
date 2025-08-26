@@ -1,0 +1,126 @@
+{% extends '_base.html'%}
+
+{% block content %}
+
+<div class="container my-auto mt-5">
+    <div class="row">
+        <div class="col-lg-4 col-md-8 col-12 mx-auto">
+            <div class="card z-index-0 fadeIn3 fadeInBottom">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+                        <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Daily Routine</h4>
+                        <div class="row mt-3">
+                            <div class="col-2 text-center ms-auto">
+                                <a class="btn btn-link px-3" href="javascript:;">
+                                    <i class="fa fa-facebook text-white text-lg"></i>
+                                </a>
+                            </div>
+                            <div class="col-2 text-center px-1">
+                                <a class="btn btn-link px-3" href="javascript:;">
+                                    <i class="fa fa-github text-white text-lg"></i>
+                                </a>
+                            </div>
+                            <div class="col-2 text-center me-auto">
+                                <a class="btn btn-link px-3" href="javascript:;">
+                                    <i class="fa fa-google text-white text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+              
+                <div class="card-body">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}<li class="text-danger"><span
+                                class="text-bold">{{message.tags.upper}}: </span>{{message}}</li>
+                        {% endif %}
+
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    
+
+                    <form method="POST" action="{% url 'daily-routine-home' %}" role="form" class="text-start">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend>General</legend>
+
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Batch ID</label>
+                                <select class="form-select" name="stock" required>
+                                    <option value="">Select Batch</option>
+                                    {% for stock in stocks %}
+                                    <option value="{{ stock.pk }}">{{ stock }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.errors.stock %}
+                                <small class="text-danger">{{ form.errors.stock.0 }}</small>
+                                {% endif %}
+                            </div>
+
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Mortality</label>
+                                <input type="number" name="mortality" class="form-control">
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Feed Type</label>
+                                <input type="number" name="mortality" class="form-control">
+                            </div>
+                        </fieldset>
+                        <!-- Morning Section -->
+                        <fieldset>
+                            <legend>Morning Section</legend>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Feed</label>
+                                <input type="number" name="morning_feed" class="form-control">
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Water</label>
+                                <input type="number" name="morning_water" class="form-control">
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Medication</label>
+                                <input type="text" name="morning_medication" class="form-control">
+                            </div>
+                        </fieldset>
+                        <!-- Morning Section -->
+                        <fieldset>
+                            <legend>Evening Section</legend>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Feed</label>
+                                <input type="number" name="evening_feed" class="form-control">
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Water</label>
+                                <input type="number" name="evening_water" class="form-control">
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Medication</label>
+                                <input type="text" name="evening_medication" class="form-control">
+                            </div>
+                        </fieldset>
+                        <label class="form-label">Comment</label>
+                        <textarea class="form-control" rows="3" name="comment"></textarea>
+
+
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign in</button>
+                        </div>
+                        <p class="mt-4 text-sm text-center">
+                            Don't have an account?
+                            <a href="" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                        </p>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

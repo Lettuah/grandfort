@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{%block content%}
+{% for message in messages %}
+    {% if message.tags == "error" %}
+    <div class="alert alert-error mb-3">{{ message }}</div>
+    {% elif message.tags == "success" %}
+    <div class="alert alert-success mb-3">{{ message }}</div>
+    {% else %}
+    <div class="alert mb-3">{{ message }}</div>
+    {% endif %}
+    {% endfor %}
+
+{%endblock%}
