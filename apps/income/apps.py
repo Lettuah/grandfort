@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class DailyRoutineConfig(AppConfig):
+class IncomeConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.daily_routine'
+    name = 'apps.income'
 
     def ready(self):
-        import apps.daily_routine.signals
+        import apps.income.signals 

@@ -1,21 +1,22 @@
 
 from django.db import models
 
-from apps.stock.models import Stock
+# from apps.stock.models import Stock
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-import logging 
 from django.db.models import Sum 
+import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
 class DailyRoutine(models.Model):
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE, related_name='stock_daily_routine')
+    stock = models.ForeignKey("stock.Stock", on_delete=models.CASCADE, related_name='stock_daily_routine')
     date = models.DateField(default=timezone.now, editable=True, help_text='Date of the routine entry')
     mortality = models.PositiveIntegerField(default=0, help_text='Number of deaths recorded (default: 0)')
     age = models.PositiveIntegerField(default=0, editable=False)
 
     FEED_TYPES = [
+        
         ('pellet', 'Pellet'),
         ('mash', 'Mash'),
         ('crumble', 'Crumble'),
@@ -41,12 +42,7 @@ class DailyRoutine(models.Model):
             stock = self.stock
             date_stocked = stock.date_stocked
             date_now = timezone.now().date()
-            self.age = (date_now - date_stocked).days
-        """Update the current stock"""
-        stock = self.stock #instance of this stock
-        stock.current_stock = stock.quantity_stocked - stock.total_sold - self.get_total_mortality()
-        stock.save()
-       
+            self.age = (date_now - date_stocked).days       
         
         """Run the clean method for validation"""
         self.clean()  # Validate before saving
@@ -54,6 +50,10 @@ class DailyRoutine(models.Model):
         super().save(*args, **kwargs)
 
     def clean(self):
+
+        """Import stock"""
+        from django.apps import apps
+        Stock = apps.get_model('stock', 'Stock')
         """Validate the model data."""
         if not hasattr(self, 'stock') or not self.stock:
             raise ValidationError('Record could not be completed. Batch ID is missing')
@@ -83,38 +83,7 @@ class DailyRoutine(models.Model):
         else: 
             logger.error(f'STOCK: {self.stock} and DATE: {self.date}')
             raise ValidationError('Something is wrong with batch id and date.')
-        
     
-    def get_total_mortality(self):
-        """
-        Returns the total mortality recorded for this stock across all DailyRoutine entries.
-        Always returns an integer (0 if no mortality recorded).
-        """
-        try:
-            total = self._get_total_mortality_from_db()
-            _total_mortality = total + self.mortality if total is not None else self.mortality
-    
-            # Update the stock model
-            stock = self.stock
-            stock.total_mortality = _total_mortality
-            stock.save()
-    
-            return _total_mortality  # Ensure we always return an integer
-        except Exception as e:
-            # Better to log than print in production
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.error(f"Could not calculate total mortality for stock {self.stock}: {str(e)}")
-            return 0
-    
-    def _get_total_mortality_from_db(self):
-        """
-        Sum mortality for all DailyRoutine entries of this stock.
-        """
-        return DailyRoutine.objects.filter(stock=self.stock).aggregate(
-            total_mortality=Sum('mortality')
-        )['total_mortality']
-
 
     class Meta:
         verbose_name = "Daily Routine"

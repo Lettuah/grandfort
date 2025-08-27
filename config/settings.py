@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.daily_routine",
     "apps.stock",
+    "apps.expenditure",
+    "apps.income",
 ]
 
 MIDDLEWARE = [
@@ -115,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Lagos"
 
 USE_I18N = True
 

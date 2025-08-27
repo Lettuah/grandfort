@@ -1,3 +1,4 @@
+
 from django.utils import timezone
 import random, string, logging
 from django.db import models
@@ -113,3 +114,4 @@ class Stock(models.Model):
 
     def __str__(self):
         return f"{self.batch_id} - {self.category}"
+    
